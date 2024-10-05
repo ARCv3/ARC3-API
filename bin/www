@@ -1,0 +1,39 @@
+const app = require('../src/app.js');
+const port = process.env.PORT || 3000;
+const https = require('https');
+const fs = require('fs');
+
+const mongoose = require('mongoose');
+
+const dotenv = require('dotenv');
+
+const options = {
+  key: fs.readFileSync("/keys/privkey.pem"),
+  cert: fs.readFileSync("/keys/fullchain.pem")
+}
+
+dotenv.config();
+
+(async () => {
+
+  mongoose.connect(process.env.MONGODB_URI)
+  const server = https.createServer(options, app);
+
+  process.on('SIGTERM', () => {
+    server.close(() => {
+      console.log('closing...')
+    })
+  })
+
+  process.on('SIGINT', () => {
+    server.close(() => {
+      console.log('closing...')
+    })
+  })
+
+  server.listen(port, () => {
+    console.log('connected at port: ' + port);
+  });
+
+})();
+
