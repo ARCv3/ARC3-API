@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const ApplicationSchema = new mongoose.Schema({
-  _id: String,
   guildSnowflake: String,
   userSnowflake: String,
+  submitDate: String,
   experience: String,
   position: String, 
   server: String,
