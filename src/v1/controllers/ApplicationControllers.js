@@ -84,6 +84,10 @@ async function PostApplication(req, res) {
     application.save();
 
     res.status(200);
+    res.json({
+      'status': 200,
+      'message': "application submitted."
+    })
 
   } catch (e) {
 
