@@ -1,5 +1,5 @@
 {
-  "name": "arc3-api",
+  "name": "ARC3-API",
   "version": "1.0.0",
   "description": "arc3 api and dashboard",
   "main": "bin/www",
