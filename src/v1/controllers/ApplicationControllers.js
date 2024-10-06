@@ -85,9 +85,9 @@ async function PostApplication(req, res) {
 
 }
 
-async function GetApplicatons(req, res) {
+async function GetApplications(req, res) {
   
-  const guildid = req.body.guildid;
+  const guildid = req.params.guildid;
 
   if (guildid === undefined) {
     
@@ -118,4 +118,4 @@ async function GetApplicatons(req, res) {
 
 }
 
-module.exports = {PostApplication, GetApplicatons}
+module.exports = {PostApplication, GetApplications}
