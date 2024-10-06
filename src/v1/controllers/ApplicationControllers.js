@@ -40,6 +40,20 @@ async function PostApplication(req, res) {
   // Get the current user
   const self = await req.state.self();
   const date = new Date();
+
+  const existing = await Application.find({'userSnowflake': self.id});
+
+  if (existing.length > 0) {
+
+    res.status(403);
+    res.json({
+      status: 403,
+      error: "Unauthorized you already have applied."
+    })
+
+    return;
+  }
+
   experience = clean(escape(experience))
   position = clean(escape(position))
   server = clean(escape(server))
