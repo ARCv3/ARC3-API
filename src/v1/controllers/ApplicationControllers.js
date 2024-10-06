@@ -35,6 +35,7 @@ async function PostApplication(req, res) {
       error: "failed to submit, fill in all the fields."
     })
 
+    return;
   }
   
   // Get the current user
