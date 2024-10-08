@@ -63,7 +63,7 @@ async function CallbackRoute(req, res) {
   // Save it as a jwt token in cookies
   const jwt = Sign(response.data);
 
-  res.cookie('session', jwt, { maxAge: response.data.expires_in })
+  res.cookie('session', jwt, { maxAge: response.data.expires_in*10 })
 
   if (src)
     res.redirect(src)
