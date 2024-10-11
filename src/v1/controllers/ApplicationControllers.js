@@ -1,6 +1,80 @@
-const Application = require('../db/Application'); 
+const Application = require('../db/Application.js'); 
+const Approval = require('../db/Approval.js');
 const clean = str =>  str.replace(/[^\x00-\x7F]/g, "");
 const escape = require('escape-html');
+
+async function GetApprovals(req, res) {
+  
+  const guildid = req.params.guildid;
+
+  if (guildid === undefined) {
+    
+    res.status(400).json({
+      status: 400,
+      message: 'Invalid id'
+    });
+
+    return;
+  }
+
+  try {
+
+    const approvals = await Approval.find({guildSnowflake: guildid});
+    res.status(200).json(approvals);
+
+  } catch (e) {
+
+    console.error(e.message);
+
+    res.status(500);
+    res.json({
+      'status': 500,
+      'error': 'An Error occured. Please try again later.'
+    });
+
+  }
+
+}
+
+
+async function PostApproval(req, res) {
+
+  const {
+    guildid, 
+    applicationid
+  } = req.params;
+
+  if (guildid === undefined || applicationid === undefined) {
+
+    res.status(400).json({
+      status: 400,
+      message: 'Invalid query, fill all fields.'
+    });
+
+    return;
+
+  }
+
+  try {
+    const application = Application.find({
+      _id: applicationid
+    });
+
+    res.status(200);
+    res.json(application);
+
+  } catch (e) {
+    console.error(e.message);
+
+    res.status(500);
+    res.json({
+      'status': 500,
+      'error': 'An Error occured please try again.'
+    })
+
+  }
+
+}
 
 async function PostApplication(req, res) {
 
@@ -137,4 +211,4 @@ async function GetApplications(req, res) {
 
 }
 
-module.exports = {PostApplication, GetApplications}
+module.exports = {PostApplication, GetApplications, PostApproval, GetApprovals}
