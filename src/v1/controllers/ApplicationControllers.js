@@ -56,12 +56,65 @@ async function PostApproval(req, res) {
   }
 
   try {
-    const application = Application.find({
+
+    const date = new Date();
+    const self = await req.state.self();
+
+    const application = await Application.find({
       _id: applicationid
     });
 
-    res.status(200);
-    res.json(application);
+    const approval = await Approval.find({
+      guildSnowflake: guildid,
+      userSnowflake: application[0].userSnowflake,
+      authorSnowflake: self.id
+    })
+
+    if (approval.length > 0) {
+
+      await Approval.deleteOne({
+        _id: approval[0]._id
+      });
+
+      res.status(200)
+      res.json({
+        approval: approval[0],
+        status: 'deleted'
+      })
+
+      return;
+
+    }
+
+    if (application.length > 0) {
+
+
+      const approval = new Approval({
+        date: date.getTime(),
+        guildSnowflake: guildid,
+        userSnowflake: application[0].userSnowflake,
+        authorSnowflake: self.id
+      });
+
+      approval.save()
+
+      res.status(200)
+      res.json({
+        approval: approval,
+        status: 'added'
+      })
+
+      return;
+
+    } else {
+
+      res.status(404)
+      res.json({
+        status: 404,
+        message: 'Could not find that application'
+      })
+    }
+
 
   } catch (e) {
     console.error(e.message);
