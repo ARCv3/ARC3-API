@@ -21,7 +21,7 @@ env:
   ECS_CLUSTER: BilleCluster                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: ARC_API.json # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: ARC_API           # set this to the name of the container in the
+  CONTAINER_NAME: ARC-API           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
 jobs:
