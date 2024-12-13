@@ -18,7 +18,7 @@ env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: billiecord_ecr
   ECS_SERVICE: ARC_API
-  ECS_CLUSTER: BillieCluster
+  ECS_CLUSTER: arn:aws:ecs:us-east-2:140023379914:cluster/BillieCluster
   ECS_TASK_DEFINITION: ARC_API.json
   CONTAINER_NAME: ARC-API
 
