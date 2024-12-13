@@ -9,7 +9,9 @@ RUN node --max-old-space-size=1000 $(which npm) ci
 
 COPY ./gen_keyfile.sh .
 
-RUN chmod u+x gen_keyfile.sh  && ./gen_keyfile.sh
+
+RUN chmod u+x gen_keyfile.sh
+RUN ./gen_keyfile.sh
 
 COPY ./src ./src
 COPY ./bin ./bin 
