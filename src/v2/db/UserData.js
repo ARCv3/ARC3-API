@@ -5,7 +5,7 @@ const userDataSchema = new mongoose.Schema({
   usersnowflake: String,
   role: String,
   reports: [String],
-  commands: number
+  commands: Number
 });
 
 const UserData = mongoose.model('userdata', userDataSchema)

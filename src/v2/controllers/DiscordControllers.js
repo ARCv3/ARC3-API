@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Guild = require('../db/Guild.js');
+const Guild = require('../../v1//db/Guild.js');
 const UserData = require('../db/UserData.js')
 
 const fetch = (...args) =>
