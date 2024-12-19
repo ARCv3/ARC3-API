@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/api', v1);
-app.use('/api/v2', v2)
+app.use('/v2/api', v2);
 app.use('/auth', auth);
 
 app.use('/static', express.static(process.env.BUILD_PATH+'/static'?? './build/static'))

@@ -1,6 +1,7 @@
 const axios = require('axios');
 const Guild = require('../../v1//db/Guild.js');
 const UserData = require('../db/UserData.js')
+const uuid = require('uuid');
 
 const fetch = (...args) =>
   import('node-fetch').then(({default:fetch}) => fetch(...args));
@@ -35,7 +36,19 @@ async function GetMe(req, res) {
     const self = await req.state.self();
 
     const userData = await UserData.find({usersnowflake: self.id})
-    self['userdata'] = userData;
+
+    if (userData.length === 0) {
+      const defaultUser = new UserData({
+        _id: uuid.v4(),
+        usersnowflake: self.id,
+        role: "Member",
+        reports: [],
+        commands: 0
+      })
+      await defaultUser.save()
+    }
+
+    self['data'] = userData[0];
 
     res.status(200).json(self);
 
