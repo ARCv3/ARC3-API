@@ -7,6 +7,8 @@ const authenticated = require('./auth/middlewares/authenticated.js');
 const whitelist = require('./auth/middlewares/whitelist.js');
 
 const v1 = require('./v1/v1.js');
+const v2 = require('./v2/v2.js')
+
 const auth = require('./auth/auth.js');
 
 const STATIC_FILES = fs.readdirSync(process.env.BUILD_PATH);
@@ -26,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/api', v1);
+app.use('/v2/api', v2);
 app.use('/auth', auth);
 
 app.use('/static', express.static(process.env.BUILD_PATH+'/static'?? './build/static'))
