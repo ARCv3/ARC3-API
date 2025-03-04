@@ -60,7 +60,7 @@ jobs:
           echo DISCORD_CLIENT_SECRET=${{ secrets.DISCORD_CLIENT_SECRET }} >> .env
           echo DISCORD_REDIRECT_URI=${{ secrets.DISCORD_REDIRECT_URI }} >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
-          echo CLIENT_REDIRECT_URT=${{ secrets.CLIENT_REDIRECT_UR }} >> .env
+          echo CLIENT_REDIRECT_URI=${{ secrets.CLIENT_REDIRECT_URI }} >> .env
           echo TOKEN=${{ secrets.TOKEN }} >> .env
           echo DIRECT_URL=${{ secrets.DIRECT_URL }} >> .env
           ehco HOSTED_URL=${{ secrets.HOSTED_URL }} >> .env
