@@ -46,7 +46,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: "140023379914.dkr.ecr.us-east-2.amazonaws.com"
-          ECR_REPOSITORY: "arc_api_repo"
+          ECR_REPOSITORY: "arc-api-repo"
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # Generate the Environment file
