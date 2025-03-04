@@ -15,12 +15,11 @@ on:
       - main
 
 env:
-  AWS_REGION: us-east-2
-  ECR_REPOSITORY: billiecord_ecr
-  ECS_SERVICE: ARC_API
-  ECS_CLUSTER: BillieCluster
-  ECS_TASK_DEFINITION: ARC_API.json
-  CONTAINER_NAME: ARC-API
+  AWS_REGION: us-east-2                  # set this to your preferred AWS region, e.g. us-west-1
+  ECS_CLUSTER: arc-api-cluster                # set this to your Amazon ECS cluster name
+  CONTAINER_NAME: arc-api
+  ECS_SERVICE: arc-api-service
+  ECS_TD: .github/workflows/td.json
 
 jobs:
   deploy:
@@ -46,9 +45,27 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REGISTRY: "140023379914.dkr.ecr.us-east-2.amazonaws.com"
+          ECR_REPOSITORY: "arc_api_repo"
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          # Generate the Environment file
+          touch .env
+
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+          echo FULLCHAIN=${{ secrets.FULLCHAIN }} >> .env
+          echo PRIVKEY=${{ secrets.PRIVKEY }} >> .env
+          echo DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }} >> .env
+          echo DISCORD_CLIENT_SECRET=${{ secrets.DISCORD_CLIENT_SECRET }} >> .env
+          echo DISCORD_REDIRECT_URI=${{ secrets.DISCORD_REDIRECT_URI }} >> .env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+          echo CLIENT_REDIRECT_URI=${{ secrets.CLIENT_REDIRECT_URI }} >> .env
+          echo TOKEN=${{ secrets.TOKEN }} >> .env
+          echo DIRECT_URL=${{ secrets.DIRECT_URL }} >> .env
+          ehco HOSTED_URL=${{ secrets.HOSTED_URL }} >> .env
+
+
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
@@ -62,7 +79,7 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
         with:
-          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          task-definition: ${{ env.ECS_TD }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
 

@@ -10,8 +10,14 @@ const v1 = require('./v1/v1.js');
 const v2 = require('./v2/v2.js')
 
 const auth = require('./auth/auth.js');
+let STATIC_FILES;
 
-const STATIC_FILES = fs.readdirSync(process.env.BUILD_PATH);
+try {
+  STATIC_FILES = fs.readdirSync(process.env.BUILD_PATH);
+} catch {
+  STATIC_FILES = []
+}
+
 
 app.use(
   helmet({
