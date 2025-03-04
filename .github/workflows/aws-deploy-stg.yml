@@ -63,7 +63,9 @@ jobs:
           echo CLIENT_REDIRECT_URI=${{ secrets.CLIENT_REDIRECT_URI }} >> .env
           echo TOKEN=${{ secrets.TOKEN }} >> .env
           echo DIRECT_URL=${{ secrets.DIRECT_URL }} >> .env
-          ehco HOSTED_URL=${{ secrets.HOSTED_URL }} >> .env
+          echo HOSTED_URL=${{ secrets.HOSTED_URL }} >> .env
+
+          cat .env
 
 
           # Build a docker container and
