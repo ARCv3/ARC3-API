@@ -48,6 +48,7 @@ jobs:
           ECR_REGISTRY: "140023379914.dkr.ecr.us-east-2.amazonaws.com"
           ECR_REPOSITORY: "arc-api-repo"
           IMAGE_TAG: ${{ github.sha }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |
           # Generate the Environment file
           touch .env
