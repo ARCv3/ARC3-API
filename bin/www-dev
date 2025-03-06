@@ -7,7 +7,7 @@ dotenv.config();
 
 const port = process.env.PORT || 3000;
 (async () => {
-
+  console.log(process.env.MONGODB_URI)
   mongoose.connect(process.env.MONGODB_URI)
 
   app.listen(port, () => {
