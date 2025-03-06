@@ -21,6 +21,10 @@
                     "value": "<PORT>"
                 },
                 {
+                    "name": "MONGODB_URI",
+                    "value": "<MONGODB_URI>"
+                },
+                {
                     "name": "FULLCHAIN",
                     "value": "<FULLCHAIN>"
                 },

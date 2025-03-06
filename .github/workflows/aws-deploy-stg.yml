@@ -47,10 +47,9 @@ jobs:
           HOSTED_URL: ${{ secrets.HOSTED_URL }}
 
         run: |
-          sed -i "s/<MONGODB_URI>/$MONGODB_URI/g" .github/workflows/td.json
-          sed -i "s/<PORT>/$PORT/g" .github/workflows/td.json
-          sed -i "s/<FULLCHAIN>/$FULLCHAIN/g" .github/workflows/td.json
-          sed -i "s/<PRIVKEY>/$PRIVKEY/g" .github/workflows/td.json
+          sed -i -e "s/<MONGODB_URI>/$MONGODB_URI/g" .github/workflows/td.json
+          sed -i -e "s/<PORT>/$PORT/g" .github/workflows/td.json
+          sed -i -e "s/<FULLCHAIN>/$FULLCHAIN/g" .github/workflows/td.json
           sed -i "s/<DISCORD_CLIENT_ID>/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
           sed -i "s/<DISCORD_CLIENT_SECRET>/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
           sed -i "s/<JWT_SECRET>/$JWT_SECRET/g" .github/workflows/td.json
