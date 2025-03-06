@@ -46,11 +46,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: "140023379914.dkr.ecr.us-east-2.amazonaws.com"
-<<<<<<< HEAD
-          ECR_REPOSITORY: "arc_api_repo"
-=======
           ECR_REPOSITORY: "arc-api-repo"
->>>>>>> 8e4455f9b40ceb4bf46c19df91586cdc8883c0b0
           IMAGE_TAG: ${{ github.sha }}
         run: |
           # Generate the Environment file
@@ -67,13 +63,9 @@ jobs:
           echo CLIENT_REDIRECT_URI=${{ secrets.CLIENT_REDIRECT_URI }} >> .env
           echo TOKEN=${{ secrets.TOKEN }} >> .env
           echo DIRECT_URL=${{ secrets.DIRECT_URL }} >> .env
-<<<<<<< HEAD
-          ehco HOSTED_URL=${{ secrets.HOSTED_URL }} >> .env
-=======
           echo HOSTED_URL=${{ secrets.HOSTED_URL }} >> .env
 
           cat .env
->>>>>>> 8e4455f9b40ceb4bf46c19df91586cdc8883c0b0
 
 
           # Build a docker container and
@@ -99,4 +91,4 @@ jobs:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
+          wait-for-service-stability: false
