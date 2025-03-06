@@ -32,6 +32,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Inject environment
+        uses: cvmaker-bv/amazon-ecs-task-environment@v1
+        with:
+          task-definition: ".github/workflows/td.json"
+          container-name: "arc-api"
+          env-variables: "${{ toJson(env) }}"
         env:
           PORT: ${{ secrets.PORT }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
@@ -46,18 +51,6 @@ jobs:
           DIRECT_URL: ${{ secrets.DIRECT_URL }}
           HOSTED_URL: ${{ secrets.HOSTED_URL }}
 
-        run: |
-          sed -i "s/VARMONGODBURI/$MONGODB_URI/g" .github/workflows/td.json
-          sed -i "s/VARPORT/$PORT/g" .github/workflows/td.json
-          sed -i "s/VARFULLCHAIN/$FULLCHAIN/g" .github/workflows/td.json
-          sed -i "s/VARDISCORDCLIENTID/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
-          sed -i "s/VARDISCORDCLIENTSECRET/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
-          sed -i "s/VARJWTSECRET/$JWTSECRET/g" .github/workflows/td.json
-          sed -i "s/VARCLIENTREDIRECTURI/$CLIENT_REDIRECT_URI/g" .github/workflows/td.json
-          sed -i "s/VARTOKEN/$TOKEN/g" .github/workflows/td.json
-          sed -i "s/VARDIRECTURL/$DIRECT_URL/g" .github/workflows/td.json
-          sed -i "s/VARHOSTEDURL/$HOSTED_UR/g".github/workflows/td.json
-          sed -i "s/VARDISCORDREDIRECT_URI/$DISCORD_REDIRECT_URI/g" .github/workflows/td.json
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
