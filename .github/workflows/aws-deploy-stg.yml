@@ -47,17 +47,17 @@ jobs:
           HOSTED_URL: ${{ secrets.HOSTED_URL }}
 
         run: |
-          sed -i -e "s/<MONGODB_URI>/$MONGODB_URI/g" .github/workflows/td.json
-          sed -i -e "s/<PORT>/$PORT/g" .github/workflows/td.json
-          sed -i -e "s/<FULLCHAIN>/$FULLCHAIN/g" .github/workflows/td.json
-          sed -i "s/<DISCORD_CLIENT_ID>/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
-          sed -i "s/<DISCORD_CLIENT_SECRET>/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
-          sed -i "s/<JWT_SECRET>/$JWT_SECRET/g" .github/workflows/td.json
-          sed -i "s/<CLIENT_REDIRECT_URI>/$CLIENT_REDIRECT_URI/g" .github/workflows/td.json
-          sed -i "s/TOKEN>/$TOKENI/g" .github/workflows/td.json
-          sed -i "s/<DIRECT_URL>/$DIRECT_URL/g" .github/workflows/td.json
-          sed -i "s/<HOSTED_URL>/$HOSTED_UR/g".github/workflows/td.json
-          sed -i "s/<DISCORD_REDIRECT_URI>/$DISCORD_REDIRECT_URI/g" .github/workflows/td.json
+          sed -i "s/VARMONGODBURI/$MONGODB_URI/g" .github/workflows/td.json
+          sed -i "s/VARPORT/$PORT/g" .github/workflows/td.json
+          sed -i "s/VARFULLCHAIN/$FULLCHAIN/g" .github/workflows/td.json
+          sed -i "s/VARDISCORDCLIENTID/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
+          sed -i "s/VARDISCORDCLIENTSECRET/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
+          sed -i "s/VARJWTSECRET/$JWTSECRET/g" .github/workflows/td.json
+          sed -i "s/VARCLIENTREDIRECTURI/$CLIENT_REDIRECT_URI/g" .github/workflows/td.json
+          sed -i "s/VARTOKEN/$TOKEN/g" .github/workflows/td.json
+          sed -i "s/VARDIRECTURL/$DIRECT_URL/g" .github/workflows/td.json
+          sed -i "s/VARHOSTEDURL/$HOSTED_UR/g".github/workflows/td.json
+          sed -i "s/VARDISCORDREDIRECT_URI/$DISCORD_REDIRECT_URI/g" .github/workflows/td.json
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
