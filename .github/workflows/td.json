@@ -25,6 +25,10 @@
                     "value": "VARMONGODBURI"
                 },
                 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0d8bef590f22334cb54e0f8c1e053d991a94032f
                     "name": "FULLCHAIN",
                     "value": "VARFULLCHAIN"
                 },
