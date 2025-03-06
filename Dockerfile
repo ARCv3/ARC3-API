@@ -1,7 +1,5 @@
 FROM node:18
 
-USER node
-
 WORKDIR /app
 
 COPY --chown=node:node ./package*.json .
@@ -22,6 +20,8 @@ WORKDIR /app
 COPY ./src ./src
 COPY ./bin ./bin
 COPY .env .env
+
+EXPOSE 80
 
 
 ENTRYPOINT [ "node", "--max-old-space-size=1000", "bin/www" ]
