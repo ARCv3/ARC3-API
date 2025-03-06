@@ -14,7 +14,53 @@
                 }
             ],
             "essential": true,
-            "environment": [],
+            "environment": [
+
+                {
+                    "name": "PORT",
+                    "value": "<PORT>"
+                },
+                {
+                    "name": "FULLCHAIN",
+                    "value": "<FULLCHAIN>"
+                },
+                {
+                    "name": "PRIVKEY",
+                    "value": "<PRIVKEY>"
+                },
+                {
+                    "name": "DISCORD_CLIENT_ID",
+                    "value": "<DISCORD_CLIENT_ID>"
+                },
+                {
+                    "name": "DISCORD_CLIENT_SECRET",
+                    "value": "<DISCORD_CLIENT_SECRET>"
+                },
+                {
+                    "name": "DISCORD_REDIRECT_URI",
+                    "value": "<DISCORD_REDIRECT_URI>"
+                },
+                {
+                    "name": "JWT_SECRET",
+                    "value": "<JWT_SECRET>"
+                },
+                {
+                    "name": "CLIENT_REDIRECT_URI",
+                    "value": "<CLIENT_REDIRECT_URI>"
+                },
+                {
+                    "name": "TOKEN",
+                    "value": "<TOKEN>"
+                },
+                {
+                    "name": "DIRECT_URL",
+                    "value": "<DIRECT_URL>"
+                },
+                {
+                    "name": "HOSTED_URL",
+                    "value": "<HOSTED_URL>"
+                }
+            ],
             "mountPoints": [],
             "volumesFrom": [],
             "logConfiguration": {
