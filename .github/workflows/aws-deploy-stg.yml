@@ -30,6 +30,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
+      - name: Inject environment
+        env:
+          PORT: ${{ secrets.PORT }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          FULLCHAIN: ${{ secrets.FULLCHAIN }}
+          PRIVKEY: ${{ secrets.PRIVKEY }}
+          DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
+          DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
+          DISCORD_REDIRECT_URI: ${{ secrets.DISCORD_REDIRECT_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          CLIENT_REDIRECT_URI: ${{ secrets.CLIENT_REDIRECT_URI }}
+          TOKEN: ${{ secrets.TOKEN }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+          HOSTED_URL: ${{ secrets.HOSTED_URL }}
+
+        run: |
+          sed -i "s/\<MONGODB\_URI\>/$MONGODB_URI/g" .github/workflows/td.json
+          sed -i "s/\<PORT\>/$PORT/g" .github/workflows/td.json
+          sed -i "s/\<FULLCHAIN\>/$FULLCHAIN/g" .github/workflows/td.json
+          sed -i "s/\<PRIVKEY\>/$PRIVKEY/g" .github/workflows/td.json
+          sed -i "s/\<DISCORD\_CLIENT\_ID\>/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
+          sed -i "s/\<DISCORD\_CLIENT\_SECRET\>/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
+          sed -i "s/\<JWT\_SECRET\>/$JWT_SECRET/g" .github/workflows/td.json
+          sed -i "s/\<CLIENT\_REDIRECT\_URI\>/$CLIENT_REDIRECT_URI/g" .github/workflows/td.json
+          sed -i "s/<TOKEN\>/$TOKEN/g" .github/workflows/td.json
+          sed -i "s/\<DIRECT\_URL\>/$DIRECT_URL/g" .github/workflows/td.json
+          sed -i "s/\<HOSTED\_URL\>/$HOSTED_UR/g".github/workflows/td.json
+          sed -i "s/\<DISCORD\_REDIRECT\_URI\>/$DISCORD_REDIRECT_URI/g" .github/workflows/td.json
 
       - name: Inject environment
         env:
@@ -76,22 +105,23 @@ jobs:
           ECR_REGISTRY: "140023379914.dkr.ecr.us-east-2.amazonaws.com"
           ECR_REPOSITORY: "arc-api-repo"
           IMAGE_TAG: ${{ github.sha }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |
           # Generate the Environment file
           touch .env
 
-          echo PORT=${{ secrets.PORT }} >> .env
-          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
-          echo FULLCHAIN=${{ secrets.FULLCHAIN }} >> .env
-          echo PRIVKEY=${{ secrets.PRIVKEY }} >> .env
-          echo DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }} >> .env
-          echo DISCORD_CLIENT_SECRET=${{ secrets.DISCORD_CLIENT_SECRET }} >> .env
-          echo DISCORD_REDIRECT_URI=${{ secrets.DISCORD_REDIRECT_URI }} >> .env
-          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
-          echo CLIENT_REDIRECT_URI=${{ secrets.CLIENT_REDIRECT_URI }} >> .env
-          echo TOKEN=${{ secrets.TOKEN }} >> .env
-          echo DIRECT_URL=${{ secrets.DIRECT_URL }} >> .env
-          echo HOSTED_URL=${{ secrets.HOSTED_URL }} >> .env
+          echo PORT=${{ secrets.PORT }} \>\> .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} \>\> .env
+          echo FULLCHAIN=${{ secrets.FULLCHAIN }} \>\> .env
+          echo PRIVKEY=${{ secrets.PRIVKEY }} \>\> .env
+          echo DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }} \>\> .env
+          echo DISCORD_CLIENT_SECRET=${{ secrets.DISCORD_CLIENT_SECRET }} \>\> .env
+          echo DISCORD_REDIRECT_URI=${{ secrets.DISCORD_REDIRECT_URI }} \>\> .env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} \>\> .env
+          echo CLIENT_REDIRECT_URI=${{ secrets.CLIENT_REDIRECT_URI }} \>\> .env
+          echo TOKEN=${{ secrets.TOKEN }} \>\> .env
+          echo DIRECT_URL=${{ secrets.DIRECT_URL }} \>\> .env
+          echo HOSTED_URL=${{ secrets.HOSTED_URL }} \>\> .env
 
           cat .env
 
@@ -102,7 +132,7 @@ jobs:
           
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \>\> $GITHUB_OUTPUT
 
 
       - name: Fill in the new image ID in the Amazon ECS task definition

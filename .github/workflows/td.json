@@ -25,6 +25,7 @@
                     "value": "<MONGODB_URI>"
                 },
                 {
+
                     "name": "FULLCHAIN",
                     "value": "<FULLCHAIN>"
                 },
