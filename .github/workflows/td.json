@@ -14,8 +14,7 @@
                 }
             ],
             "essential": true,
-            "environment": [
-            ],
+            "environment": [],
             "mountPoints": [],
             "volumesFrom": [],
             "systemControls": []
