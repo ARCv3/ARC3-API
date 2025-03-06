@@ -47,18 +47,18 @@ jobs:
           HOSTED_URL: ${{ secrets.HOSTED_URL }}
 
         run: |
-          sed -i "s/\<MONGODB\_URI\>/$MONGODB_URI/g" .github/workflows/td.json
-          sed -i "s/\<PORT\>/$PORT/g" .github/workflows/td.json
-          sed -i "s/\<FULLCHAIN\>/$FULLCHAIN/g" .github/workflows/td.json
-          sed -i "s/\<PRIVKEY\>/$PRIVKEY/g" .github/workflows/td.json
-          sed -i "s/\<DISCORD\_CLIENT\_ID\>/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
-          sed -i "s/\<DISCORD\_CLIENT\_SECRET\>/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
-          sed -i "s/\<JWT\_SECRET\>/$JWT_SECRET/g" .github/workflows/td.json
-          sed -i "s/\<CLIENT\_REDIRECT\_URI\>/$CLIENT_REDIRECT_URI/g" .github/workflows/td.json
-          sed -i "s/<TOKEN\>/$TOKEN/g" .github/workflows/td.json
-          sed -i "s/\<DIRECT\_URL\>/$DIRECT_URL/g" .github/workflows/td.json
-          sed -i "s/\<HOSTED\_URL\>/$HOSTED_UR/g".github/workflows/td.json
-          sed -i "s/\<DISCORD\_REDIRECT\_URI\>/$DISCORD_REDIRECT_URI/g" .github/workflows/td.json
+          sed -i -e "s/<MONGODB_URI>/$MONGODB_URI/g" .github/workflows/td.json
+          sed -i -e "s/<PORT>/$PORT/g" .github/workflows/td.json
+          sed -i -e "s/<FULLCHAIN>/$FULLCHAIN/g" .github/workflows/td.json
+          sed -i "s/<DISCORD_CLIENT_ID>/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
+          sed -i "s/<DISCORD_CLIENT_SECRET>/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
+          sed -i "s/<JWT_SECRET>/$JWT_SECRET/g" .github/workflows/td.json
+          sed -i "s/<CLIENT_REDIRECT_URI>/$CLIENT_REDIRECT_URI/g" .github/workflows/td.json
+          sed -i "s/TOKEN>/$TOKENI/g" .github/workflows/td.json
+          sed -i "s/<DIRECT_URL>/$DIRECT_URL/g" .github/workflows/td.json
+          sed -i "s/<HOSTED_URL>/$HOSTED_UR/g".github/workflows/td.json
+          sed -i "s/<DISCORD_REDIRECT_URI>/$DISCORD_REDIRECT_URI/g" .github/workflows/td.json
+
 
       - name: Inject environment
         env:
