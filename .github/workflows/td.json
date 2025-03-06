@@ -14,57 +14,7 @@
                 }
             ],
             "essential": true,
-            "environment": [
-
-                {
-                    "name": "PORT",
-                    "value": "VARPORT"
-                },
-                {
-                    "name": "MONGODB_URI",
-                    "value": "VARMONGODBURI"
-                },
-                {
-                    "name": "FULLCHAIN",
-                    "value": "VARFULLCHAIN"
-                },
-                {
-                    "name": "PRIVKEY",
-                    "value": "VARPRIVKEY"
-                },
-                {
-                    "name": "DISCORD_CLIENT_ID",
-                    "value": "VARDISCORDCLIENTID"
-                },
-                {
-                    "name": "DISCORD_CLIENT_SECRET",
-                    "value": "VARDISCORDCLIENTSECRET"
-                },
-                {
-                    "name": "DISCORD_REDIRECT_URI",
-                    "value": "VARDISCORDREDIRECTURI"
-                },
-                {
-                    "name": "JWT_SECRET",
-                    "value": "VARJWTSECRET"
-                },
-                {
-                    "name": "CLIENT_REDIRECT_URI",
-                    "value": "VARCLIENTREDIRECTURI"
-                },
-                {
-                    "name": "TOKEN",
-                    "value": "VARTOKEN"
-                },
-                {
-                    "name": "DIRECT_URL",
-                    "value": "VARDIRECTURL"
-                },
-                {
-                    "name": "HOSTED_URL",
-                    "value": "VARHOSTEDURL"
-                }
-            ],
+            "environment": [],
             "mountPoints": [],
             "volumesFrom": [],
             "logConfiguration": {
