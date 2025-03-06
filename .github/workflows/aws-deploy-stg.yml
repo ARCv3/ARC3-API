@@ -47,18 +47,18 @@ jobs:
           HOSTED_URL: ${{ secrets.HOSTED_URL }}
 
         run: |
-          sed -i "s/<MONGODB_URI>/$MONGODB_URI/g" .github/workflows/td.json
-          sed -i "s/<PORT>/$PORT/g" .github/workflows/td.json
-          sed -i "s/<FULLCHAIN>/$FULLCHAIN/g" .github/workflows/td.json
-          sed -i "s/<PRIVKEY>/$PRIVKEY/g" .github/workflows/td.json
-          sed -i "s/<DISCORD_CLIENT_ID>/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
-          sed -i "s/<DISCORD_CLIENT_SECRET>/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
-          sed -i "s/<JWT_SECRET>/$JWT_SECRET/g" .github/workflows/td.json
-          sed -i "s/<CLIENT_REDIRECT_URI>/$CLIENT_REDIRECT_URI/g" .github/workflows/td.json
-          sed -i "s/TOKEN>/$TOKENI/g" .github/workflows/td.json
-          sed -i "s/<DIRECT_URL>/$DIRECT_URL/g" .github/workflows/td.json
-          sed -i "s/<HOSTED_URL>/$HOSTED_UR/g".github/workflows/td.json
-          sed -i "s/<DISCORD_REDIRECT_URI>/$DISCORD_REDIRECT_URI/g" .github/workflows/td.json
+          sed -i "s/\<MONGODB_URI\>/$MONGODB_URI/g" .github/workflows/td.json
+          sed -i "s/\<PORT\>/$PORT/g" .github/workflows/td.json
+          sed -i "s/\<FULLCHAIN\>/$FULLCHAIN/g" .github/workflows/td.json
+          sed -i "s/\<PRIVKEY\>/$PRIVKEY/g" .github/workflows/td.json
+          sed -i "s/\<DISCORD_CLIENT_ID\>/$DISCORD_CLIENT_ID/g" .github/workflows/td.json
+          sed -i "s/\<DISCORD_CLIENT_SECRET\>/$DISCORD_CLIENT_SECRET/g" .github/workflows/td.json
+          sed -i "s/\<JWT_SECRET\>/$JWT_SECRET/g" .github/workflows/td.json
+          sed -i "s/\<CLIENT_REDIRECT_URI\>/$CLIENT_REDIRECT_URI/g" .github/workflows/td.json
+          sed -i "s/<TOKEN\>/$TOKEN/g" .github/workflows/td.json
+          sed -i "s/\<DIRECT_URL\>/$DIRECT_URL/g" .github/workflows/td.json
+          sed -i "s/\<HOSTED_URL\>/$HOSTED_UR/g".github/workflows/td.json
+          sed -i "s/\<DISCORD_REDIRECT_URI\>/$DISCORD_REDIRECT_URI/g" .github/workflows/td.json
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
@@ -82,18 +82,18 @@ jobs:
           # Generate the Environment file
           touch .env
 
-          echo PORT=${{ secrets.PORT }} >> .env
-          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
-          echo FULLCHAIN=${{ secrets.FULLCHAIN }} >> .env
-          echo PRIVKEY=${{ secrets.PRIVKEY }} >> .env
-          echo DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }} >> .env
-          echo DISCORD_CLIENT_SECRET=${{ secrets.DISCORD_CLIENT_SECRET }} >> .env
-          echo DISCORD_REDIRECT_URI=${{ secrets.DISCORD_REDIRECT_URI }} >> .env
-          echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
-          echo CLIENT_REDIRECT_URI=${{ secrets.CLIENT_REDIRECT_URI }} >> .env
-          echo TOKEN=${{ secrets.TOKEN }} >> .env
-          echo DIRECT_URL=${{ secrets.DIRECT_URL }} >> .env
-          echo HOSTED_URL=${{ secrets.HOSTED_URL }} >> .env
+          echo PORT=${{ secrets.PORT }} \>\> .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} \>\> .env
+          echo FULLCHAIN=${{ secrets.FULLCHAIN }} \>\> .env
+          echo PRIVKEY=${{ secrets.PRIVKEY }} \>\> .env
+          echo DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }} \>\> .env
+          echo DISCORD_CLIENT_SECRET=${{ secrets.DISCORD_CLIENT_SECRET }} \>\> .env
+          echo DISCORD_REDIRECT_URI=${{ secrets.DISCORD_REDIRECT_URI }} \>\> .env
+          echo JWT_SECRET=${{ secrets.JWT_SECRET }} \>\> .env
+          echo CLIENT_REDIRECT_URI=${{ secrets.CLIENT_REDIRECT_URI }} \>\> .env
+          echo TOKEN=${{ secrets.TOKEN }} \>\> .env
+          echo DIRECT_URL=${{ secrets.DIRECT_URL }} \>\> .env
+          echo HOSTED_URL=${{ secrets.HOSTED_URL }} \>\> .env
 
           cat .env
 
@@ -104,7 +104,7 @@ jobs:
           
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \>\> $GITHUB_OUTPUT
 
 
       - name: Fill in the new image ID in the Amazon ECS task definition
