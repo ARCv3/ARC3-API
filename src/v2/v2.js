@@ -8,7 +8,7 @@ router.use(express.urlencoded({extended: true}));
 
 router.use('/discord', Discord);
 
-router.get('/heath', (req, res) => {
+router.get('/health', (req, res) => {
   res.status(200);
   res.json({
     message: "Service is online"
