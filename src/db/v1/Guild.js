@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
+require('mongoose-long')(mongoose);
+
+const { Types: Long } = mongoose;
 
 const guildSchema = new mongoose.Schema({
   _id: String,
-  guildsnowflake: String, 
+  guildsnowflake: String,
   premium: Boolean,
   moderators: [String],
   ownerid: String

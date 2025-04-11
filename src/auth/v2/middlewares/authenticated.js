@@ -16,10 +16,6 @@ async function authenticated(req, res, next) {
   // Get the session token from the heaers
   const token = req.headers.authorization;
 
-  console.log(req.originalUrl)
-  console.log(token)
-
-
   // If we got no cookies, we can redirect to the login page.
   if (!token) {
     res.redirect(`/auth/login?src=${req.originalUrl}`);

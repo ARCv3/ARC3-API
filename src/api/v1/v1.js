@@ -14,7 +14,6 @@ const v1 = (auth = 'v1') => {
   router.use(express.urlencoded({extended: true}));
   
   router.use('/transcripts', Transcripts(auth));
-  console.log(auth)
   router.use('/discord', Discord(auth));
   router.use('/appeals', Appeals(auth));
   router.use('/notes', Notes(auth));
