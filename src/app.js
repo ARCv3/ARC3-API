@@ -2,22 +2,16 @@ const express = require('express');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser')
 const app = express();
-const fs = require('fs');
-const authenticated = require('./auth/middlewares/authenticated.js');
-const whitelist = require('./auth/middlewares/whitelist.js');
 
-const v1 = require('./v1/v1.js');
-const v2 = require('./v2/v2.js')
+const v1 = require('./api/v1/v1.js');
+const v2 = require('./api/v2/v2.js')
 
-const auth = require('./auth/auth.js');
-let STATIC_FILES;
+const authv1 = require('./auth/v1/auth.js');
+const authv2 = require('./auth/v2/auth.js')
 
-try {
-  STATIC_FILES = fs.readdirSync(process.env.BUILD_PATH);
-} catch {
-  STATIC_FILES = []
-}
+const cors = require("cors")
 
+app.use(cors());
 
 app.use(
   helmet({
@@ -29,54 +23,19 @@ app.use(
     },
   })
 );
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/api', v1);
-app.use('/v2/api', v2);
-app.use('/auth', auth);
+// v1 API
+app.use('/auth', authv1);
+app.use('/api', v1());
 
-app.use('/static', express.static(process.env.BUILD_PATH+'/static'?? './build/static'))
+// v2 API
+app.use('/v2/api', v2());
+app.use('/v2/auth', authv2);
 
-app.get('/login', (req, res) => {
-  res.sendFile('login.html', { root: process.env.BUILD_PATH?? "./build" });
-})
-
-// Protect the transcripts route.
-app.get('/:guildid/transcripts/', authenticated, whitelist, (req, res) => {
-  res.sendFile('index.html', { root: process.env.BUILD_PATH?? "./build" });
-})
-
-
-// Protect the transcripts route.
-app.get('/:guildid/transcripts/*', authenticated, whitelist, (req, res) => {
-  res.sendFile('index.html', { root: process.env.BUILD_PATH?? "./build" });
-})
-
-// Protect the notes routes.
-app.get('/:guildid/notes/', authenticated, whitelist, (req, res) => {
-  res.sendFile('index.html', { root: process.env.BUILD_PATH?? "./build" });
-})
-
-// Protect the notes routes.
-app.get('/:guildid/notes/*', authenticated, whitelist, (req, res) => {
-  res.sendFile('index.html', { root: process.env.BUILD_PATH?? "./build" });
-})
-
-// Authenticate the rest of the client.
-app.get('/*',  (req, res, next) => {
-
-  const file = req.path.split('/')[1];
-  if (STATIC_FILES.includes(file)) {
-    res.sendFile(file, {root: process.env.BUILD_PATH?? "./build"})
-    return;
-  }
-
-  authenticated(req, res, () => {
-    res.sendFile('index.html', { root: process.env.BUILD_PATH?? "./build" });
-  });
-
-});
+console.log("Frontend hosted at: " + process.env.HOSTED_URL)
 
 module.exports = app;
