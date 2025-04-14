@@ -17,6 +17,7 @@ module.exports = (auth = 'v2') => {
     }
   
     const guilds = await Guild.find();
+
     const guild = guilds.filter(x => x.guildsnowflake.toString() === id)
   
     if (guild.length === 0) {
