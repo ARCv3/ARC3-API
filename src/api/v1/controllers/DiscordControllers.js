@@ -92,7 +92,7 @@ async function GetGuild(req, res) {
 
   const id = req.params.id;
   const guildschemas = await Guild.find();
-  const guildData = guildschemas.filter(x => x.guildsnowflake === id)[0]
+  const guildData = guildschemas.filter(x => x.guildsnowflake.toString() === id)[0]
 
   // Guard if the userid is undefined
   if (id === undefined)
