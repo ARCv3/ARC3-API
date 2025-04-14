@@ -1,18 +1,17 @@
 const mongoose = require('mongoose');
 require('mongoose-long')(mongoose);
 
-const { Types: Long } = mongoose;
+const { Types: { Long, ObjectId} } = mongoose;
 
 const guildSchema = new mongoose.Schema({
-  _id: String,
-  guildsnowflake: String,
+  _id: ObjectId,
+  guildsnowflake: Long,
   premium: Boolean,
   moderators: [String],
-  ownerid: String
-}, {
-  collection: "Guilds"
+  ownerid: Long
 });
 
-const Guild = mongoose.model("Guild", guildSchema);
+
+const Guild = mongoose.model("Guild", guildSchema, "Guilds");
 
 module.exports = Guild;

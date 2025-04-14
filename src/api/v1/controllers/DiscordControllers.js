@@ -142,7 +142,7 @@ async function GetGuilds(req, res) {
   var self = await req.state.self()
   var cacheKey = self.id + "guilds"
   var guildschemas = await Guild.find();
-  var guilds = guildschemas.map(x => x.guildsnowflake)
+  var guilds = guildschemas.map(x => x.guildsnowflake.toString())
 
   try {
     
@@ -153,7 +153,6 @@ async function GetGuilds(req, res) {
     }
 
     axios.get(`https://discord.com/api/users/@me/guilds`, selfOps(req.state.user.access_token)).then(json => {
-      
       if (!discordCache[cacheKey])
         discordCache[cacheKey] = json.data;
 
