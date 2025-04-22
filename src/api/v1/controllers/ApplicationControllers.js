@@ -60,9 +60,8 @@ async function PostApproval(req, res) {
     const date = new Date();
     const self = await req.state.self();
 
-    const application = await Application.find({
-      _id: applicationid
-    });
+    const applications = await Application.find();
+    const application = applications.filter(x => x.guildSnowflake === guildid && x._id.toString() === applicationid)
 
     const approval = await Approval.find({
       guildSnowflake: guildid,
