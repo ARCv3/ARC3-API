@@ -7,7 +7,7 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Deploy to Amazon ECS
+name: Deploy to Amazon ECS LIVE
 
 on: 'workflow_dispatch'
 
@@ -15,7 +15,7 @@ env:
   AWS_REGION: us-east-2                  # set this to your preferred AWS region, e.g. us-west-1
   ECS_CLUSTER: arc-live-cluster                # set this to your Amazon ECS cluster name
   CONTAINER_NAME: arc-api
-  ECS_SERVICE: arc-live-api-service
+  ECS_SERVICE: arc3-live-api-service
   ECS_TD: .github/workflows/td.json
 
 jobs:
