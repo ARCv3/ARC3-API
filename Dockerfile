@@ -1,29 +1,28 @@
-FROM node:18
+FROM node:alpine AS build
 
 WORKDIR /app
-
-COPY --chown=node:node ./package*.json .
-RUN node --max-old-space-size=1000 $(which npm) ci
-
-COPY --chown=node:node ./gen_keyfile.sh .
-
-RUN chmod u+x ./gen_keyfile.sh
+COPY --chown=node:node ./package*.json ./
+RUN node $(which npm) ci
 
 WORKDIR /keys
-RUN openssl rand -base64 756 > ./mongo.keyfile
-RUN chmod 400 ./mongo.keyfile
-RUN openssl genrsa > ./privkey.pem
-RUN openssl req -new -x509 -key ./privkey.pem -out ./fullchain.pem -sha256 -days 3650 -nodes -subj "/C=CA/ST=QC/L=Montreal/O=Billiecord/OU=Engineering/CN=stg.billiecord.com"
+RUN apk add openssl;
+COPY gen_keyfile.sh ./gen_keyfile.sh
+RUN chmod +x ./gen_keyfile.sh
+RUN ./gen_keyfile.sh
+
+
+FROM node:lts-slim
 
 WORKDIR /app
 
+COPY --from=build /app/node_modules /app/node_modules
+COPY --from=build /keys /app/keys
 COPY ./src ./src
 COPY ./bin ./bin
-COPY .env .env
 
 EXPOSE 80
 
 
-ENTRYPOINT [ "node", "--max-old-space-size=1000", "bin/www" ]
+ENTRYPOINT [ "node", "bin/www" ]
 
 
