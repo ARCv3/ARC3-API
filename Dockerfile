@@ -16,7 +16,7 @@ FROM node:lts-slim
 WORKDIR /app
 
 COPY --from=build /app/node_modules /app/node_modules
-COPY --from=build /keys /app/keys
+COPY --from=build /keys /app
 COPY ./src ./src
 COPY ./bin ./bin
 
