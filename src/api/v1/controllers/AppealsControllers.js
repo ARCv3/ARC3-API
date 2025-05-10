@@ -2,7 +2,6 @@ const Appeal = require('../../../db/v1/Appeal');
 const escape = require('escape-html');
 const uuid = require('uuid');
 const net = require('net');
-const io = require('socket.io-client');
 
 const clean = str =>  str.replace(/[^\x00-\x7F]/g, "");
 
